@@ -20,4 +20,6 @@ const Navbar_Routes = [
             }
         ]
     }
-]
+];
+
+export default Navbar_Routes;
