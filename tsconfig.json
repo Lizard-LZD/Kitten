@@ -21,6 +21,10 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "./frontend/src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }
