@@ -1,28 +1,28 @@
 import { Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {
   // Navbar,
   ScrollToTop,
   // Footer,
 } from '../Components';
-import '../Styles/GlobalStyles.css';
+// import '../Styles/GlobalStyles.css';
 
 const Home = lazy(() => import("../Pages/Home.js"));
 
-function Routes() {
+function Routess() {
   return (
     <ScrollToTop>
       <Suspense fallback="">
-        <Switch>
+        <Routes>
           <Route exact path="/">
             {/* <Navbar /> */}
             <Home />
             {/* <Footer /> */}
           </Route>
-        </Switch>
+        </Routes>
       </Suspense>
     </ScrollToTop>
   );
 }
 
-export default Routes;
+export default Routess;
