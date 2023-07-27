@@ -7,7 +7,7 @@ import {
 } from '../Components';
 import '../Styles/GlobalStyles.css';
 
-const Home = lazy(() => import("../Pages/"));
+const Home = lazy(() => import("../Pages/Home.js"));
 
 function Routes() {
   return (
