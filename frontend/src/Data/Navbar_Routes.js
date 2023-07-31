@@ -1,6 +1,6 @@
 const Navbar_Routes = [
     {
-        label: "",
+        label: "About",
         path: ""
     },
     {

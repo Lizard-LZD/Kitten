@@ -22,8 +22,8 @@ function MyComponent(props) {
   return (
     <div>
       <p>Count: {props.count}</p>
-      <button onClick={props.increment}>Increment</button>
-      <button onClick={props.decrement}>Decrement</button>
+      <button onClick={() => props.increment()}>Increment</button>
+      <button onClick={() => props.decrement()}>Decrement</button>
       <button onClick={() => props.incrementByAmount(5)}>Increment by 5</button>
     </div>
   );
