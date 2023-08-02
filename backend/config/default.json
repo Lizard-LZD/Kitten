@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://ZIQI:ZIQI@cluster0.ehloezt.mongodb.net/?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://ZIQI:ZIQI@cluster0.ehloezt.mongodb.net/?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrecttoken"
 }
