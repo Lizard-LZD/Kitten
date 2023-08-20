@@ -1,10 +1,22 @@
 const Navbar_Routes = [
     {
-        label: "About",
-        path: ""
+        label: "Home",
+        path: "/"
     },
     {
-        label: "",
+        label: "Diary",
+        path: "/diary"
+    },
+    {
+        label: "Adoption",
+        path: "/adoption"
+    },
+    {
+        label: "Shop",
+        path: "/shop"
+    },
+    {
+        label: "My Kitten",
         submenu: [
             {
                 label: "",
