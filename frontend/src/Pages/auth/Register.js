@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setField, registerUser } from "../../Redux/Reducers/RegisterSlice";
@@ -29,7 +28,7 @@ function Register(props) {
 
   return (
     <div>
-      <h1>Create your account</h1>
+      <h1>Sign up</h1>
       <form onSubmit={(e) => onSubmit(e)}>
         <div>
           <input
@@ -59,6 +58,7 @@ function Register(props) {
             value={password}
             onChange={(e) => onChange(e)}
             minLength={6}
+            autoComplete="new-password"
           />
         </div>
         <div>

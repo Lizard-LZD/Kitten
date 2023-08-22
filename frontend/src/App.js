@@ -3,6 +3,12 @@ import React from 'react';
 import Routess from './Routes/Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
+import setAuthToken from './Utils/setAuthToken';
+
+const token = localStorage.token;
+if (token) {
+  setAuthToken(token);
+}
 
 // Create an ErrorBoundary component
 class ErrorBoundary extends React.Component {
