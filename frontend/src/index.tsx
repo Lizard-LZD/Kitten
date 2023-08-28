@@ -1,14 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./Redux/Store";
 
-ReactDOM.render(
+// Use createRoot instead of ReactDOM.render
 
-  <Provider store={store}>
-    <App />
-  </Provider>,
+const rootElement = document.getElementById("root");
 
-  document.getElementById("root")
-);
+if (rootElement) {
+  createRoot(rootElement).render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+}
+

@@ -9,9 +9,12 @@ const ProfileSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  kitten: {
-    type: String,
-  },
+  kittens: [
+    {
+      type: mongoose.Schema.Types.ObjectId, // Reference to Kitten model
+      ref: "kitten",
+    },
+  ],
 });
 
 const Profile = mongoose.model("profile", ProfileSchema);

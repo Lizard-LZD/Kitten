@@ -1,7 +1,61 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import {
+  getAdoptions,
+  applyAdoption,
+  cancelApply,
+} from "../Redux/Reducers/AdoptionSlice";
 
-export default function Adoption() {
+const AdoptionsPage = ({
+  adoptions,
+  loading,
+  getAdoptions,
+  applyAdoption,
+  cancelApply,
+}) => {
+  useEffect(() => {
+    getAdoptions();
+  }, [adoptions]);
+
+  const handleApply = (id) => {
+    applyAdoption(id);
+  };
+
+  const handleCancelApply = (id) => {
+    cancelApply(id);
+  };
+
   return (
-    <div>Adoption</div>
-  )
-}
+    <div>
+      <h1>Adoptions Page</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {adoptions.map((adoption) => (
+            <li key={adoption._id}>
+              <p>{adoption.kitten}</p>
+              <button onClick={() => handleApply(adoption._id)}>Apply</button>
+              <button onClick={() => handleCancelApply(adoption._id)}>
+                Cancel Apply
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  adoptions: state.adoption.adoptions,
+  loading: state.adoption.loading,
+});
+
+const mapDispatchToProps = {
+  getAdoptions,
+  applyAdoption,
+  cancelApply,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdoptionsPage);

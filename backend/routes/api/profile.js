@@ -5,6 +5,7 @@ const checkObjectId = require("../../middleware/checkObjectId");
 const { check, validationResult } = require("express-validator");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Kitten = require("../../models/Kitten")
 
 // @route    GET api/profile/me
 // @desc     Get current users profile
@@ -38,27 +39,32 @@ router.post(
     }
 
     const { haveCats, kitten } = req.body;
+
     const profileFields = {};
     profileFields.user = req.user.id;
     if (haveCats) profileFields.haveCats = haveCats;
-    if (kitten) profileFields.kitten = kitten;
+
+    const kittenFields = {};
+    if (kitten) {
+      kittenFields.breed = kitten.breed;
+      kittenFields.alt = kitten.alt;
+      kittenFields.pic = kitten.pic;
+    }
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
-      if (profile) {
-        //Update
-        console.log("Update profile");
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-        return res.json(profile);
+      const profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true }
+      );
+
+      if (kitten) {
+        const newKitten = new Kitten(kittenFields);
+        const savedKitten = await newKitten.save();
+        profile.kittens.push(savedKitten._id);
+        await profile.save();
       }
-      //Create
-      console.log("Create profile");
-      profile = new Profile(profileFields);
-      await profile.save();
+
       res.json(profile);
     } catch (err) {
       console.error(err.message);

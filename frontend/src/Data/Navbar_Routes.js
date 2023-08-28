@@ -12,8 +12,8 @@ const Navbar_Routes = [
         path: "/adoption"
     },
     {
-        label: "Shop",
-        path: "/shop"
+        label: "Game",
+        path: "/game"
     },
     {
         label: "My Kitten",

@@ -10,7 +10,7 @@ const Register = lazy(() => import("../Pages/auth/Register.js"));
 const Adoption = lazy(() => import("../Pages/Adoption.js"));
 const Diary = lazy(() => import("../Pages/Diary"));
 const HealthTracker = lazy(() => import("../Pages/HealthTracker.js"));
-const Shop = lazy(() => import("../Pages/Shop.js"));
+const Game = lazy(() => import("../Pages/Game.js"));
 
 function Routess() {
   return (
@@ -29,7 +29,7 @@ function Routess() {
             path="/healthtracker"
             element={<Layout children={<HealthTracker />} />}
           />
-          <Route path="/shop" element={<Layout children={<Shop />} />} />
+          <Route path="/game" element={<Layout children={<Game />} />} />
         </Routes>
       </Suspense>
     </ScrollToTop>
