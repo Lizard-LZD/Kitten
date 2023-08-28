@@ -125,13 +125,11 @@ export const addComment = (postId, text) => async (dispatch) => {
     },
   };
   try {
-    console.log('11111111111111111111111111111')
     const res = await axios.post(
       `/api/posts/comment/${postId}`,
       text,
       config
     );
-    console.log('222222222222222222222222222')
     dispatch(addOrRemoveComment(res.data));
     // dispatch(setAlert("Comment added", "success"));
   } catch (error) {
