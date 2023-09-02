@@ -39,7 +39,7 @@ export default function Navbar() {
                   {dropdown &&
                     menu.submenu.map((subItem, subIndex) => (
                       <li key={subIndex}>
-                        <Link to={menu.path}>{subItem.label}</Link>
+                        <Link to={subItem.path}>{subItem.label}</Link>
                       </li>
                     ))}
                 </ul>

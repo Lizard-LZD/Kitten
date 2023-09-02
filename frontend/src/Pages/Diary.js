@@ -62,7 +62,6 @@ const Post = ({
       {post.comments.map((comment) => (
         <div key={comment._id}>
           <p>{comment.text}</p>
-          {console.log(currentUser, comment)}
           {currentUser && currentUser.toString() === comment.user && (
             <button onClick={() => onRemoveComment(post._id, comment._id)}>
               Delete Comment
@@ -148,6 +147,7 @@ const PostPage = ({
 }) => {
   useEffect(() => {
     getPosts();
+    console.log(currentUser);
   }, [posts]);
 
   const handleCreatePost = (formData) => {

@@ -34,7 +34,9 @@ const AdoptionsPage = ({
         <ul>
           {adoptions.map((adoption) => (
             <li key={adoption._id}>
-              <p>{adoption.kitten}</p>
+              {console.log(adoptions)}
+              <h3>{adoption.kitten.breed}</h3>
+              <img src={adoption.kitten.pic} alt={adoption.kitten.alt}></img>
               <button onClick={() => handleApply(adoption._id)}>Apply</button>
               <button onClick={() => handleCancelApply(adoption._id)}>
                 Cancel Apply

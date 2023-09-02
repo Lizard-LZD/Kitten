@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 // @access   Private
 router.get("/", auth, async (req, res) => {
   try {
-    const adoptions = await Adoption.find().sort({ date: -1 });
+    const adoptions = await Adoption.find().sort({ date: -1 }).populate("kitten");
     res.json(adoptions);
   } catch (err) {
     console.error(err.message);
@@ -25,7 +25,7 @@ router.get("/", auth, async (req, res) => {
 // @access   Private
 router.get("/:id", auth, checkObjectId("id"), async (req, res) => {
   try {
-    const adoption = await Adoption.findById(req.params.id);
+    const adoption = await Adoption.findById(req.params.id).populate("kitten");
     if (!adoption) {
       return res.status(404).json({ msg: "Adoption not found" });
     }

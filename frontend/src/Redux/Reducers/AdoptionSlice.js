@@ -89,8 +89,8 @@ export const getAdoption = (id) => async (dispatch) => {
   }
 };
 
-export const createAdoption = (ownerId, kittenId) => async (dispatch) => {
-  const formData = { owner: ownerId, kitten: kittenId };
+export const createAdoption = (kittenId) => async (dispatch) => {
+  const formData = { kitten: kittenId };
 
   try {
     const res = await axios.post(`/api/adoptions`, formData);

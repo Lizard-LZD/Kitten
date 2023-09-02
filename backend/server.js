@@ -4,8 +4,10 @@ const connectDB = require("./config/db");
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 5000;
-
+const bodyParser = require('body-parser');
 app.use(express.json());
+app.use(bodyParser.json({ limit: '50mb' })); // 增加请求体限制
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 connectDB();
 
 app.get("/", (req, res) => res.send("API running"));

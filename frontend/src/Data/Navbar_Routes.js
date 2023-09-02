@@ -19,16 +19,16 @@ const Navbar_Routes = [
         label: "My Kitten",
         submenu: [
             {
-                label: "",
-                path: ""
+                label: "Kitten",
+                path: "/kitten"
             },
             {
-                label: "",
-                path: ""
+                label: "Health tracker",
+                path: "/healthTracker"
             },
             {
-                label: "",
-                path: ""
+                label: "Profile",
+                path: "/profile"
             }
         ]
     }
