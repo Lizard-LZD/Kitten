@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setField, loginUser } from "../../Redux/Reducers/LoginSlice";
+import { setField, loginUser, logoutUser } from "../../Redux/Reducers/LoginSlice";
 
 function Login(props) {
   const { email, password, error } = props;
@@ -18,6 +18,7 @@ function Login(props) {
         password,
       };
       console.log("Submitting login data:", authUser);
+      props.logoutUser();
       props.loginUser(authUser);
     }
 
@@ -68,6 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setField,
   loginUser,
+  logoutUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

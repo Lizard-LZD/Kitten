@@ -40,7 +40,7 @@ const KittenPage = ({
   useEffect(() => {
     getKittens();
     getAdoptions();
-  }, [kittens,adoptions]);
+  }, []);
 
   const [formData, setFormData] = useState({
     breed: "",
@@ -110,7 +110,7 @@ const KittenPage = ({
   };
 
   const handleRemoveAd = (kittenId, adoptions) => {
-    adoptions = adoptions.filter((adoption) => adoption.kitten == kittenId);
+    adoptions = adoptions.filter((adoption) => adoption.kitten._id == kittenId);
     removeAdoption(adoptions[0]._id);
   };
 

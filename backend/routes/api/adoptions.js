@@ -71,7 +71,6 @@ router.post(
 
       const newAdoption = new Adoption({
         kitten: req.body.kitten,
-        owner: req.user.id,
         adopter: []
       });
 
@@ -90,14 +89,14 @@ router.post(
 // @access   Private
 router.delete("/:id", [auth, checkObjectId("id")], async (req, res) => {
   try {
-    const adoption = await Adoption.findById(req.params.id);
+    const adoption = await Adoption.findById(req.params.id).populate("kitten");
 
     if (!adoption) {
       return res.status(404).json({ msg: "Adoption not found" });
     }
 
     // Check owner
-    if (adoption.owner.toString() !== req.user.id) {
+    if (adoption.kitten.owner.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User not authorized" });
     }
 

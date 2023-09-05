@@ -34,6 +34,9 @@ const kittenSlice = createSlice({
       );
       state.loading = false;
     },
+    clearKittens(state, action) {
+      state.kittens = [];
+    },
     profileError(state, action) {
       state.error = action.payload;
       state.loading = false;
@@ -46,6 +49,7 @@ export const {
   addKittenSuccess,
   deleteKittenSuccess,
   updateKittenSuccess,
+  clearKittens,
   profileError,
 } = kittenSlice.actions;
 

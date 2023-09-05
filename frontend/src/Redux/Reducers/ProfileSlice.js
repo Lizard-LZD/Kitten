@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { clearKittens } from './KittenSlice';
+import {clearAdoptions} from  "./AdoptionSlice"
 
 const initialState = {
   userProfiles: [], // Array to store user profiles
@@ -96,6 +98,8 @@ export const deleteUserProfile = () => async (dispatch) => {
   try {
     await axios.delete("/api/profile");
     dispatch(clearUserProfile());
+    dispatch(clearKittens()); // 清空kitten
+    dispatch(clearAdoptions())
   } catch (error) {
     dispatch(userProfileError(error.response.data));
     console.log(error.response.data);

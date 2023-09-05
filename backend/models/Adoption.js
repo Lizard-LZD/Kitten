@@ -6,10 +6,6 @@ const AdoptionSchema = new mongoose.Schema({
     ref: "kitten",
     required: true
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
-  },
   date: {
     type: Date,
     default: Date.now

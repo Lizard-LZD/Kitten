@@ -52,6 +52,9 @@ const adoptionSlice = createSlice({
       state.adoptions = updatedAdoptions;
       state.loading = false;
     },
+    clearAdoptions(state, action) {
+      state.adoptions = [];
+    },
     adoptionError(state, action) {
       state.error = action.payload;
       state.loading = false;
@@ -66,6 +69,7 @@ export const {
   deleteAdoption,
   applyAdoptionSuccess,
   cancelApplySuccess,
+  clearAdoptions,
   adoptionError,
 } = adoptionSlice.actions;
 

@@ -7,6 +7,8 @@ import {
   deleteUserProfile,
 } from "../Redux/Reducers/ProfileSlice";
 
+import { logoutUser } from "../Redux/Reducers/LoginSlice";
+
 const UserProfilePage = ({
   userProfiles,
   userProfile,
@@ -16,6 +18,7 @@ const UserProfilePage = ({
   getUserProfiles,
   updateUserProfile,
   deleteUserProfile,
+  logoutUser,
 }) => {
   useEffect(() => {
     getUserProfiles();
@@ -23,9 +26,14 @@ const UserProfilePage = ({
     getUserProfile(currentUser);
   }, [userProfiles, currentUser]);
 
+  const [name, setName] = useState("");
   const [searchName, setSearchName] = useState(""); // 搜索框的输入
   const [searchResults, setSearchResults] = useState([]); // 搜索结果
   const [showResults, setShowResults] = useState(false); // 控制是否显示搜索结果
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
@@ -34,6 +42,7 @@ const UserProfilePage = ({
 
     if (query.length > 0) {
       // 执行搜索并更新搜索结果
+      console.log(userProfiles);
       const results = userProfiles.filter((profile) =>
         profile.user.name.toLowerCase().includes(query.toLowerCase())
       );
@@ -50,7 +59,7 @@ const UserProfilePage = ({
     // 更新当前用户的profile
     updateUserProfile({
       _id: currentUser, // 传递用户的ID以进行更新
-      name: userProfile.user.name, // 保留用户名
+      name: name || userProfile.user.name, // 保留用户名
       // 添加其他字段
     });
   };
@@ -59,13 +68,14 @@ const UserProfilePage = ({
     // 删除当前用户的profile
     deleteUserProfile(currentUser);
     // 执行额外的操作
+    logoutUser();
   };
 
   return (
     <div>
       <h1>User Profile</h1>
       {/* 用户可以查看自己的profile */}
-      {userProfile && (
+      {userProfile ? (
         <div>
           <h2>Your Profile</h2>
           <form>
@@ -74,8 +84,9 @@ const UserProfilePage = ({
               <input
                 type="text"
                 name="name"
-                value={userProfile.user.name}
-                readOnly
+                onChange={handleChange}
+                placeholder={userProfile.user.name}
+                // readOnly
               />
             </div>
             {/* 添加其他输入字段 */}
@@ -83,6 +94,8 @@ const UserProfilePage = ({
           <button onClick={handleUpdateProfile}>Update Profile</button>
           <button onClick={handleDeleteProfile}>Delete Profile</button>
         </div>
+      ) : (
+        <h2>Add a kitten to create profile</h2>
       )}
 
       {/* 搜索框 */}
@@ -137,7 +150,6 @@ const ProfileCard = ({ profile }) => {
 const mapStateToProps = (state) => ({
   userProfiles: state.profile.userProfiles,
   userProfile: state.profile.userProfile,
-
   currentUser: state.login.currentUser,
   loading: state.profile.loading,
 });
@@ -147,6 +159,7 @@ const mapDispatchToProps = {
   getUserProfiles,
   updateUserProfile,
   deleteUserProfile,
+  logoutUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);
